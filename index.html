@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>母亲节快乐</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF85A2',
+                        secondary: '#FFD1DC',
+                        accent: '#FFB6C1',
+                        dark: '#8B4513',
+                        light: '#FFF0F5',
+                        whatsapp: '#25D366',
+                        wechat: '#7BB32E',
+                        messenger: '#00B2FF',
+                        sms: '#FFC107',
+                        email: '#FF5722'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .animate-float {
+                animation: float 3s ease-in-out infinite;
+            }
+            .animate-appear {
+                animation: appear 0.5s ease-out forwards;
+            }
+            .animate-gradient {
+                background-size: 200% 200%;
+                animation: gradient 5s ease infinite;
+            }
+            .scale-hover {
+                transition: transform 0.3s ease;
+            }
+            .scale-hover:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes appear {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-light to-secondary min-h-screen font-sans">
+    <div class="container mx-auto px-4 py-8 max-w-md">
+        <!-- 标题区域 -->
+        <div class="text-center mb-8 animate-appear">
+            <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold text-primary text-shadow mb-2">
+                <i class="fa fa-heart text-red-500 animate-pulse"></i>
+                母亲节快乐
+                <i class="fa fa-heart text-red-500 animate-pulse"></i>
+            </h1>
+            <p class="text-dark/80 text-lg">亲爱的妈妈，您辛苦了！</p>
+        </div>
+
+        <!-- 主内容区域 -->
+        <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 mb-8 animate-appear" style="animation-delay: 0.2s">
+            <div class="flex justify-center mb-6">
+                <div class="relative w-40 h-40 rounded-full overflow-hidden border-4 border-primary animate-float">
+                    <img src="https://picsum.photos/seed/mom/400/400" alt="妈妈的照片" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-primary/20 rounded-full"></div>
+                </div>
+            </div>
+
+            <div id="wish-container" class="mb-6">
+                <p class="text-dark text-lg leading-relaxed text-center">
+                    点击下方按钮，接收孩子给您的祝福
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mt-8">
+                <button id="generate-btn" class="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                    <i class="fa fa-gift mr-2"></i>接收祝福
+                </button>
+                <button id="share-btn" class="bg-dark hover:bg-dark/90 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-dark/50" disabled>
+                    <i class="fa fa-share-alt mr-2"></i>分享祝福
+                </button>
+            </div>
+        </div>
+
+        <!-- 分享选项区域 (隐藏) -->
+        <div id="share-options" class="hidden bg-white/90 backdrop-blur-md rounded-2xl shadow-lg p-6 mb-8 animate-appear">
+            <h2 class="text-xl font-bold text-primary mb-6 text-center">分享祝福</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <button id="share-wechat" class="flex flex-col items-center justify-center p-3 bg-wechat/10 hover:bg-wechat/20 rounded-xl transition-all duration-300 scale-hover">
+                    <i class="fa-brands fa-weixin text-3xl text-wechat mb-2"></i>
+                    <span class="text-sm text-dark">微信</span>
+                </button>
+                <button id="share-whatsapp" class="flex flex-col items-center justify-center p-3 bg-whatsapp/10 hover:bg-whatsapp/20 rounded-xl transition-all duration-300 scale-hover">
+                    <i class="fa-brands fa-whatsapp text-3xl text-whatsapp mb-2"></i>
+                    <span class="text-sm text-dark">WhatsApp</span>
+                </button>
+                <button id="share-messenger" class="flex flex-col items-center justify-center p-3 bg-messenger/10 hover:bg-messenger/20 rounded-xl transition-all duration-300 scale-hover">
+                    <i class="fa-brands fa-facebook-messenger text-3xl text-messenger mb-2"></i>
+                    <span class="text-sm text-dark">Messenger</span>
+                </button>
+                <button id="share-sms" class="flex flex-col items-center justify-center p-3 bg-sms/10 hover:bg-sms/20 rounded-xl transition-all duration-300 scale-hover">
+                    <i class="fa-solid fa-comment text-3xl text-sms mb-2"></i>
+                    <span class="text-sm text-dark">短信</span>
+                </button>
+                <button id="share-email" class="flex flex-col items-center justify-center p-3 bg-email/10 hover:bg-email/20 rounded-xl transition-all duration-300 scale-hover">
+                    <i class="fa-solid fa-envelope text-3xl text-email mb-2"></i>
+                    <span class="text-sm text-dark">邮件</span>
+                </button>
+                <button id="share-copy" class="flex flex-col items-center justify-center p-3 bg-dark/10 hover:bg-dark/20 rounded-xl transition-all duration-300 scale-hover">
+                    <i class="fa-solid fa-copy text-3xl text-dark mb-2"></i>
+                    <span class="text-sm text-dark">复制</span>
+                </button>
+            </div>
+            <button id="close-share-btn" class="w-full mt-6 bg-secondary hover:bg-secondary/90 text-dark font-semibold py-2 rounded-lg transition-all duration-300">
+                返回
+            </button>
+        </div>
+
+        <!-- 祝福模板区域 (隐藏) -->
+        <div id="templates-container" class="hidden bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 mb-8 animate-appear">
+            <h2 class="text-xl font-bold text-primary mb-4">祝福模板</h2>
+            <div id="templates-list" class="space-y-3 mb-4">
+                <!-- 祝福模板将通过JS动态生成 -->
+            </div>
+            <button id="close-templates-btn" class="w-full bg-secondary hover:bg-secondary/90 text-dark font-semibold py-2 rounded-lg transition-all duration-300">
+                关闭
+            </button>
+        </div>
+
+        <!-- 底部区域 -->
+        <div class="text-center text-dark/60 text-sm mt-8 animate-appear" style="animation-delay: 0.4s">
+            <p>💕 永远爱您的孩子 💕</p>
+            <p class="mt-2">
+                <i class="fa fa-calendar-alt mr-1"></i>
+                <span id="current-date"></span>
+            </p>
+        </div>
+    </div>
+
+    <!-- 烟花效果容器 -->
+    <div id="fireworks-container" class="fixed inset-0 pointer-events-none z-50"></div>
+
+    <!-- 分享成功提示 (隐藏) -->
+    <div id="share-success" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="bg-dark text-white p-4 rounded-lg shadow-xl animate-appear">
+            <p class="text-center">🎉 分享成功！</p>
+        </div>
+    </div>
+
+    <script>
+        // 祝福模板
+        const templates = [
+            "亲爱的妈妈，母亲节快乐！感谢您{years}年来的悉心照顾，您的爱如春风化雨，滋润着我的心田。祝您身体健康，永远年轻美丽！",
+            "妈妈，母亲节到了。{years}年的时光，您用爱为我撑起一片天空。愿您生活顺遂，笑容永远灿烂，我爱您！",
+            "时光荏苒，转眼{years}年过去了。妈妈，您的爱是我成长的动力源泉。母亲节到了，祝您平安喜乐，一切如意！",
+            "妈妈，您是世界上最伟大的人！{years}年的岁月里，您为我付出了太多太多。今天是您的节日，愿您被岁月温柔以待，幸福安康！",
+            "感谢您{years}年来的谆谆教导和无私奉献。您的爱，就像阳光一样温暖，像泉水一样清澈。母亲节快乐，我爱您！"
+        ];
+
+        // 额外小礼物
+        const gifts = [
+            "今天我来做饭，让您休息一天！",
+            "给您捶捶背，捏捏肩，放松一下！",
+            "送您一束鲜花，愿您心情美美的！",
+            "陪您逛街购物，买您喜欢的东西！",
+            "为您唱一首动听的歌，愿您喜欢！",
+            "给您一个大大的拥抱，感谢您的爱！"
+        ];
+
+        // 表情符号
+        const emojis = ["💐", "🌸", "🌼", "🌷", "🌹", "💖", "💝", "💗", "🌟", "🎉", "🥰", "👩", "👨👩👧👦"];
+
+        // 获取元素
+        const wishContainer = document.getElementById('wish-container');
+        const generateBtn = document.getElementById('generate-btn');
+        const shareBtn = document.getElementById('share-btn');
+        const templatesContainer = document.getElementById('templates-container');
+        const templatesList = document.getElementById('templates-list');
+        const closeTemplatesBtn = document.getElementById('close-templates-btn');
+        const currentDateElement = document.getElementById('current-date');
+        const fireworksContainer = document.getElementById('fireworks-container');
+        const shareOptions = document.getElementById('share-options');
+        const closeShareBtn = document.getElementById('close-share-btn');
+        const shareSuccess = document.getElementById('share-success');
+        const shareButtons = {
+            wechat: document.getElementById('share-wechat'),
+            whatsapp: document.getElementById('share-whatsapp'),
+            messenger: document.getElementById('share-messenger'),
+            sms: document.getElementById('share-sms'),
+            email: document.getElementById('share-email'),
+            copy: document.getElementById('share-copy')
+        };
+
+        // 设置当前日期
+        const now = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+        currentDateElement.textContent = now.toLocaleDateString('zh-CN', options);
+
+        // 生成随机数
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // 生成随机表情符号组合
+        function getRandomEmojis(count) {
+            let result = '';
+            for (let i = 0; i < count; i++) {
+                const randomIndex = Math.floor(Math.random() * emojis.length);
+                result += emojis[randomIndex];
+            }
+            return result;
+        }
+
+        // 计算年龄 - 固定为24岁
+        function calculateYears() {
+            return 24;
+        }
+
+        // 生成祝福
+        function generateWish() {
+            const years = calculateYears();
+            const templateIndex = Math.floor(Math.random() * templates.length);
+            let wish = templates[templateIndex].replace('{years}', years);
+            
+            // 随机选择一个礼物
+            const giftIndex = Math.floor(Math.random() * gifts.length);
+            const gift = gifts[giftIndex];
+            
+            // 添加随机表情符号
+            wish = `${getRandomEmojis(3)} ${wish} ${getRandomEmojis(3)}\n\n🎁 ${gift} ${getRandomEmojis(2)}`;
+            
+            return wish;
+        }
+
+        // 显示祝福
+        function showWish() {
+            const wish = generateWish();
+            wishContainer.innerHTML = `<p class="text-dark text-lg leading-relaxed text-center animate-appear">${wish.replace(/\n/g, '<br>')}</p>`;
+            
+            // 启用分享按钮
+            shareBtn.disabled = false;
+            
+            // 显示烟花效果
+            createFireworks();
+            
+            // 滚动到祝福区域
+            wishContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // 创建烟花效果
+        function createFireworks() {
+            // 清空之前的烟花
+            fireworksContainer.innerHTML = '';
+            
+            // 创建5个烟花
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    const size = getRandomInt(100, 200);
+                    const x = getRandomInt(10, window.innerWidth - size);
+                    const y = getRandomInt(10, window.innerHeight / 2);
+                    
+                    firework.className = 'absolute';
+                    firework.style.left = `${x}px`;
+                    firework.style.top = `${y}px`;
+                    firework.style.width = `${size}px`;
+                    firework.style.height = `${size}px`;
+                    
+                    // 随机颜色
+                    const hue = getRandomInt(0, 360);
+                    firework.style.background = `radial-gradient(circle, hsl(${hue}, 100%, 70%) 0%, transparent 70%)`;
+                    firework.style.opacity = '0';
+                    firework.style.borderRadius = '50%';
+                    firework.style.animation = `firework 1.5s ease-out forwards`;
+                    
+                    fireworksContainer.appendChild(firework);
+                    
+                    // 自动移除烟花
+                    setTimeout(() => {
+                        firework.remove();
+                    }, 2000);
+                }, i * 300);
+            }
+        }
+
+        // 显示所有祝福模板
+        function showTemplates() {
+            templatesList.innerHTML = '';
+            const years = calculateYears();
+            
+            templates.forEach((template, index) => {
+                const templateItem = document.createElement('div');
+                templateItem.className = 'p-3 bg-light rounded-lg border border-primary/20';
+                
+                const templateText = document.createElement('p');
+                templateText.className = 'text-dark text-sm';
+                templateText.textContent = template.replace('{years}', years);
+                
+                const useBtn = document.createElement('button');
+                useBtn.className = 'mt-2 text-primary text-sm font-medium hover:underline';
+                useBtn.textContent = '使用此模板';
+                useBtn.addEventListener('click', () => {
+                    wishContainer.innerHTML = `<p class="text-dark text-lg leading-relaxed text-center animate-appear">${templateText.textContent} ${getRandomEmojis(3)}</p>`;
+                    templatesContainer.classList.add('hidden');
+                    shareBtn.disabled = false;
+                });
+                
+                templateItem.appendChild(templateText);
+                templateItem.appendChild(useBtn);
+                templatesList.appendChild(templateItem);
+            });
+            
+            templatesContainer.classList.remove('hidden');
+            templatesContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 显示分享选项
+        function showShareOptions() {
+            shareOptions.classList.remove('hidden');
+            shareOptions.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 隐藏分享选项
+        function hideShareOptions() {
+            shareOptions.classList.add('hidden');
+        }
+
+        // 获取当前祝福文本
+        function getCurrentWish() {
+            return wishContainer.textContent.trim();
+        }
+
+        // 分享到微信
+        function shareToWechat() {
+            const wish = getCurrentWish();
+            alert(`请打开微信，将以下祝福发送给妈妈：\n\n${wish}`);
+            showShareSuccess();
+        }
+
+        // 分享到WhatsApp
+        function shareToWhatsapp() {
+            const wish = getCurrentWish();
+            const encodedWish = encodeURIComponent(wish);
+            window.open(`whatsapp://send?text=${encodedWish}`, '_blank');
+            showShareSuccess();
+        }
+
+        // 分享到Messenger
+        function shareToMessenger() {
+            const wish = getCurrentWish();
+            const encodedWish = encodeURIComponent(wish);
+            window.open(`https://www.messenger.com/t/?text=${encodedWish}`, '_blank');
+            showShareSuccess();
+        }
+
+        // 分享到短信
+        function shareToSms() {
+            const wish = getCurrentWish();
+            const encodedWish = encodeURIComponent(wish);
+            window.open(`sms:?body=${encodedWish}`, '_blank');
+            showShareSuccess();
+        }
+
+        // 分享到邮件
+        function shareToEmail() {
+            const wish = getCurrentWish();
+            const encodedWish = encodeURIComponent(wish);
+            window.open(`mailto:?subject=母亲节祝福&body=${encodedWish}`, '_blank');
+            showShareSuccess();
+        }
+
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const wish = getCurrentWish();
+            navigator.clipboard.writeText(wish)
+                .then(() => {
+                    showShareSuccess();
+                })
+                .catch(err => {
+                    console.error('复制失败:', err);
+                    alert('复制失败，请手动复制。');
+                });
+        }
+
+        // 显示分享成功提示
+        function showShareSuccess() {
+            shareSuccess.classList.remove('hidden');
+            setTimeout(() => {
+                shareSuccess.classList.add('hidden');
+            }, 2000);
+        }
+
+        // 添加事件监听器
+        generateBtn.addEventListener('click', showWish);
+        shareBtn.addEventListener('click', showShareOptions);
+        generateBtn.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            showTemplates();
+        });
+        closeTemplatesBtn.addEventListener('click', () => {
+            templatesContainer.classList.add('hidden');
+        });
+        closeShareBtn.addEventListener('click', hideShareOptions);
+        
+        // 分享按钮事件
+        shareButtons.wechat.addEventListener('click', shareToWechat);
+        shareButtons.whatsapp.addEventListener('click', shareToWhatsapp);
+        shareButtons.messenger.addEventListener('click', shareToMessenger);
+        shareButtons.sms.addEventListener('click', shareToSms);
+        shareButtons.email.addEventListener('click', shareToEmail);
+        shareButtons.copy.addEventListener('click', copyToClipboard);
+        
+        // 添加PWA支持
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
